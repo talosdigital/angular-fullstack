@@ -1,16 +1,19 @@
-<h2>Address</h2>
-<form ng-controller="AddressCtrl" class="form-inline" name="form" ng-submit="login(form)" novalidate>
+<h2>Address Book</h2>
+<form ng-controller="AddressCtrl" class="form-inline address-form" name="form" ng-submit="login(form)" novalidate>
+
+    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+
     <h3>Contact info</h3>
-    <div class="form-group col-sm-6">
+    <div class="form-group col-sm-6" ng-class="error">
         <label class="sr-only">First name</label>
 
-        <input type="text" name="firstname" class="form-control" ng-model="user.name.first" placeholder="First Name">
+        <input type="text" name="First Name" class="form-control" ng-model="user.name.first" placeholder="First Name" required>
     </div>
 
-    <div class="form-group col-sm-6">
+    <div class="form-group col-sm-6" ng-class="error">
         <label class="sr-only">Last name</label>
 
-        <input type="text" name="lastname" class="form-control" ng-model="user.name.last" placeholder="Last Name">
+        <input type="text" name="Last Name" class="form-control" ng-model="user.name.last" placeholder="Last Name" required>
     </div>
 
     <div class="form-group col-sm-12">
@@ -59,5 +62,8 @@
         <input type="text" name="country" class="form-control" ng-model="user.country"  placeholder="Country">
     </div>
 
-    <button type="submit" class="btn btn-lg btn-primary"> Sign in </button>
+    <div class="form-group col-sm-12">
+        <button type="submit" class="btn btn-lg btn-primary"> Sign in </button>
+    </div>
+
 </form>

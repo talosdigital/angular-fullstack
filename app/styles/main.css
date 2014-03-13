@@ -71,3 +71,6 @@ body {
     border-bottom: 0;
   }
 }
+.dashboard-view .address-form .form-group {
+    margin: 5px 0px;
+}

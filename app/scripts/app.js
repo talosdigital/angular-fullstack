@@ -5,7 +5,8 @@ angular.module('nodeserverApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ng-grid'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
