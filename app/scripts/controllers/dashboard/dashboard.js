@@ -11,6 +11,9 @@ angular.module('nodeserverApp')
             case 'address':
                 $scope.templateUrl = 'partials/dashboard/address';
                 break;
+            case 'account':
+                $scope.templateUrl = 'partials/dashboard/account';
+                break;
             default:
                 $scope.templateUrl = 'partials/dashboard/welcome';
         }
