@@ -7,6 +7,10 @@ angular.module('nodeserverApp')
 
             if(form.$valid) {
                 console.log($scope.user);
+                $scope.alerts = [
+                    { type: 'success', msg: 'Settings were saved' }
+                ];
+                $scope.error = '';
             }
             else{
                 var required = '';

@@ -21,6 +21,10 @@ angular.module('nodeserverApp', [
             templateUrl: 'partials/dashboard/main',
             controller: 'DashboardCtrl'
         })
+        .when('/dashboard/:url/:sub', {
+            templateUrl: 'partials/dashboard/main',
+            controller: 'DashboardCtrl'
+        })
       .when('/login', {
         templateUrl: 'partials/login',
         controller: 'LoginCtrl'
