@@ -2,14 +2,16 @@
 <div class="row">
     <div class="col-sm-4">
         <ul class="nav nav-pills nav-stacked">
-            <li><a ng-href="dashboard">Account Dashboard</a></li>
+            <li><a ng-href="dashboard/main">Account Dashboard</a></li>
             <li><a ng-href="dashboard/account">Account Information</a></li>
-            <li><a ng-href="dashboard/address/index">Address Book</a></li>
+            <li><a ng-href="dashboard/address/view">Address Book</a></li>
             <li><a ng-href="">My Wishlist</a></li>
             <li><a ng-href="">Newsletter Subscription</a></li>
         </ul>
     </div>
     <div class="col-sm-8">
-        <div class="dashboard-view" ng-include="templateUrl"></div>
+        <div class="dashboard-view" ui-view>
+
+        </div>
     </div>
 </div>
