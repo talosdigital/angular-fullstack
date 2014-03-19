@@ -13,56 +13,59 @@ angular.module('nodeserverApp', [
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'partials/main',
+            templateUrl: 'partials/user/main',
             controller: 'MainCtrl'
         })
         .state('dashboard', {
-            url: '/dashboard',
-            templateUrl: 'partials/dashboard/main',
-            controller: 'DashboardCtrl'
+            url: '/user/dashboard',
+            templateUrl: 'partials/user/dashboard/main',
+            controller: 'UserDashboardDashboardCtrl',
+            authenticate: true
         })
         .state('dashboard.welcome', {
             url: '/welcome',
-            templateUrl: 'partials/dashboard/welcome'
+            parent: 'dashboard',
+            templateUrl: 'partials/user/dashboard/welcome'
         })
         .state('dashboard.account', {
             url: '/account',
-            templateUrl: 'partials/dashboard/account',
-            controller: 'AccountCtrl'
+            templateUrl: 'partials/user/dashboard/account',
+            controller: 'UserDashboardAccountCtrl'
         })
         .state('dashboard.address', {
             url: '/address',
-            templateUrl: 'partials/dashboard/address/index'
+            templateUrl: 'partials/user/dashboard/address/index'
 
         })
         .state('dashboard.address.view', {
             url: '/view',
-            templateUrl: 'partials/dashboard/address/view',
-            controller: 'AddressViewCtrl'
+            templateUrl: 'partials/user/dashboard/address/view',
+            controller: 'UserDashboardAddressViewCtrl'
 
         })
         .state('dashboard.address.new', {
             url: '/new',
-            templateUrl: 'partials/dashboard/address/new',
-            controller: 'AddressCtrl'
+            templateUrl: 'partials/user/dashboard/address/new',
+            controller: 'UserDashboardAddressNewCtrl'
 
         })
         .state('login', {
-            url: '/login',
-            templateUrl: 'partials/login',
+            url: '/user/login',
+            templateUrl: 'partials/user/login',
             controller: 'LoginCtrl'
         })
         .state('signup', {
-            url: '/signup',
-            templateUrl: 'partials/signup',
+            url: '/user/signup',
+            templateUrl: 'partials/user/signup',
             controller: 'SignupCtrl'
         })
         .state('settings', {
-            url: '/settings',
-            templateUrl: 'partials/settings',
+            url: '/user/settings',
+            templateUrl: 'partials/user/settings',
             controller: 'SettingsCtrl',
             authenticate: true
         });
+
     $urlRouterProvider.otherwise("/");
 
     $locationProvider.html5Mode(true);
@@ -72,7 +75,7 @@ angular.module('nodeserverApp', [
       return {
         'responseError': function(response) {
           if(response.status === 401 || response.status === 403) {
-            $location.path('/login');
+            $location.path('/user/login');
             return $q.reject(response);
           }
           else {

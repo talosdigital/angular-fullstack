@@ -4,10 +4,10 @@ angular.module('nodeserverApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
     $scope.menu = [{
       'title': 'Home',
-      'link': '/'
+      'link': 'home'
     }, {
       'title': 'Settings',
-      'link': '/settings'
+      'link': 'settings'
     }];
     
     $scope.logout = function() {

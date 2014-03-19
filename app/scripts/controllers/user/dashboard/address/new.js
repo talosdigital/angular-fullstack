@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('AccountCtrl', function ($scope, $location,$routeParams, Auth) {
+  .controller('UserDashboardAddressNewCtrl', function ($scope, $location,$routeParams, Auth) {
         $scope.login = function(form) {
             $scope.submitted = true;
 
