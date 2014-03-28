@@ -3,16 +3,21 @@
 
     <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
 
-    <div class="form-group col-sm-12" ng-class="error">
+    <div class="form-group col-sm-12" ng-class="form.FirstName.$invalid && submitted ? 'has-error' : ''">
         <label class="sr-only">First name</label>
 
-        <input type="text" name="First Name" class="form-control" ng-model="user.name.first" placeholder="First Name" required>
+        <input type="text" name="FirstName" class="form-control" ng-model="user.name.first" placeholder="First Name" required>
+        <p class="help-block" ng-show="form.FirstName.$invalid && submitted">
+            Please fill your first name
+        </p>
     </div>
 
-    <div class="form-group col-sm-12" ng-class="error">
+    <div class="form-group col-sm-12" ng-class="form.LastName.$invalid && submitted ? 'has-error' : ''">
         <label class="sr-only">Last name</label>
-
-        <input type="text" name="Last Name" class="form-control" ng-model="user.name.last" placeholder="Last Name" required>
+        <input type="text" name="LastName" class="form-control" ng-model="user.name.last" placeholder="Last Name" required>
+        <p class="help-block" ng-show="form.LastName.$invalid && submitted">
+            Please fill your first name
+        </p>
     </div>
 
     <div class="form-group col-sm-12">
@@ -55,6 +60,6 @@
     </div>
 
     <div class="form-group col-sm-12">
-        <button type="submit" class="btn btn-lg btn-primary"> Sign in </button>
+        <button type="submit" class="btn btn-lg btn-primary"> Save </button>
     </div>
 </form>

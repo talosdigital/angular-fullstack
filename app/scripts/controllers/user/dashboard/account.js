@@ -3,6 +3,7 @@
 angular.module('nodeserverApp')
   .controller('UserDashboardAccountCtrl', function ($scope, $location,$routeParams, Auth) {
         $scope.login = function(form) {
+
             $scope.submitted = true;
 
             if(form.$valid) {
@@ -10,7 +11,6 @@ angular.module('nodeserverApp')
                 $scope.alerts = [
                     { type: 'success', msg: 'Settings were saved' }
                 ];
-                $scope.error = '';
             }
             else{
                 var required = '';
@@ -19,9 +19,8 @@ angular.module('nodeserverApp')
                     required += form.$error.required[i].$name + ' ';
                 }
                 $scope.alerts = [
-                    { type: 'danger', msg: 'Oh snap! looks like '+required+' are missing.' }
+                    { type: 'danger', msg: 'Please fill all required fields' }
                 ];
-                $scope.error = 'has-error';
             }
         };
 
