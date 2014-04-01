@@ -16,34 +16,33 @@ angular.module('nodeserverApp', [
             templateUrl: 'partials/user/main',
             controller: 'MainCtrl'
         })
-        .state('dashboard', {
-            url: '/user/dashboard',
+        .state('account', {
+            url: '/user/account',
             templateUrl: 'partials/user/dashboard/main',
-            controller: 'UserDashboardDashboardCtrl',
-            authenticate: true
+            controller: 'UserDashboardDashboardCtrl'
         })
-        .state('dashboard.welcome', {
-            url: '/welcome',
-            parent: 'dashboard',
-            templateUrl: 'partials/user/dashboard/welcome'
+        .state('account.welcome', {
+            url: '/index',
+            templateUrl: 'partials/user/dashboard/welcome',
+            controller: 'UserDashboardWelcomeCtrl'
         })
-        .state('dashboard.account', {
-            url: '/account',
+        .state('account.information', {
+            url: '/information',
             templateUrl: 'partials/user/dashboard/account',
             controller: 'UserDashboardAccountCtrl'
         })
-        .state('dashboard.address', {
+        .state('account.address', {
             url: '/address',
             templateUrl: 'partials/user/dashboard/address/index'
 
         })
-        .state('dashboard.address.view', {
+        .state('account.address.view', {
             url: '/view',
             templateUrl: 'partials/user/dashboard/address/view',
             controller: 'UserDashboardAddressViewCtrl'
 
         })
-        .state('dashboard.address.new', {
+        .state('account.address.new', {
             url: '/new',
             templateUrl: 'partials/user/dashboard/address/new',
             controller: 'UserDashboardAddressNewCtrl'

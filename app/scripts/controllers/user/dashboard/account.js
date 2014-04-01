@@ -2,22 +2,28 @@
 
 angular.module('nodeserverApp')
   .controller('UserDashboardAccountCtrl', function ($scope, $location,$routeParams, Auth) {
+
+        $scope.changepass = false;
+
+        $scope.submittedpass = false;
+
         $scope.login = function(form) {
 
             $scope.submitted = true;
+
+            if($scope.changepass){
+                $scope.submittedpass = true;
+            }
 
             if(form.$valid) {
                 console.log($scope.user);
                 $scope.alerts = [
                     { type: 'success', msg: 'Settings were saved' }
                 ];
+                $scope.submitted = false;
+                $scope.submittedpass = false;
             }
             else{
-                var required = '';
-                for (var i = 0 ; i < form.$error.required.length; i++)
-                {
-                    required += form.$error.required[i].$name + ' ';
-                }
                 $scope.alerts = [
                     { type: 'danger', msg: 'Please fill all required fields' }
                 ];
