@@ -13,55 +13,61 @@ angular.module('nodeserverApp', [
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'partials/user/main',
+            templateUrl: 'partials/main',
             controller: 'MainCtrl'
         })
         .state('account', {
             url: '/user/account',
-            templateUrl: 'partials/user/dashboard/main',
-            controller: 'UserDashboardDashboardCtrl'
+            templateUrl: 'partials/user/account/main',
+            controller: 'UserAccountDashboardCtrl',
+            authenticate: true
         })
         .state('account.welcome', {
             url: '/index',
-            templateUrl: 'partials/user/dashboard/welcome',
-            controller: 'UserDashboardWelcomeCtrl'
+            templateUrl: 'partials/user/account/welcome',
+            controller: 'UserAccountWelcomeCtrl',
+            authenticate: true
         })
         .state('account.information', {
             url: '/information',
-            templateUrl: 'partials/user/dashboard/account',
-            controller: 'UserDashboardAccountCtrl'
+            templateUrl: 'partials/user/account/account',
+            controller: 'UserAccountAccountCtrl',
+            authenticate: true
         })
         .state('account.address', {
             url: '/address',
-            templateUrl: 'partials/user/dashboard/address/index'
+            templateUrl: 'partials/user/account/address/index',
+            authenticate: true
 
         })
         .state('account.address.view', {
             url: '/view',
-            templateUrl: 'partials/user/dashboard/address/view',
-            controller: 'UserDashboardAddressViewCtrl'
+            templateUrl: 'partials/user/account/address/view',
+            controller: 'UserAccountAddressViewCtrl',
+            authenticate: true
 
         })
         .state('account.address.new', {
             url: '/new',
-            templateUrl: 'partials/user/dashboard/address/new',
-            controller: 'UserDashboardAddressNewCtrl'
+            templateUrl: 'partials/user/account/address/new',
+            controller: 'UserAccountAddressNewCtrl',
+            authenticate: true
 
         })
         .state('login', {
-            url: '/user/login',
-            templateUrl: 'partials/user/login',
-            controller: 'LoginCtrl'
+            url: '/user/auth/login',
+            templateUrl: 'partials/user/auth/login',
+            controller: 'UserAuthLoginCtrl'
         })
         .state('signup', {
-            url: '/user/signup',
-            templateUrl: 'partials/user/signup',
-            controller: 'SignupCtrl'
+            url: '/user/auth/signup',
+            templateUrl: 'partials/user/auth/signup',
+            controller: 'UserAuthSignupCtrl'
         })
         .state('settings', {
-            url: '/user/settings',
-            templateUrl: 'partials/user/settings',
-            controller: 'SettingsCtrl',
+            url: '/user/auth/settings',
+            templateUrl: 'partials/user/auth/settings',
+            controller: 'UserAuthSettingsCtrl',
             authenticate: true
         });
 

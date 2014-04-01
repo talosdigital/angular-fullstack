@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('UserAuthSettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {

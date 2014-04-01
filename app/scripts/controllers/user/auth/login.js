@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location) {
+  .controller('UserAuthLoginCtrl', function ($scope, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
