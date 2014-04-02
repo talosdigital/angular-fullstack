@@ -1,0 +1,6 @@
+<div class="alert alert-info" ng-show="salutation">Hello, {{user.name}}</div>
+<div class="alert alert-warning" ng-show="byebye">Bye bye :'(</div>
+
+<button type="button" class="btn btn-primary btn-large" ng-show="!logged" ng-disabled="!facebookReady" ng-click="IntentLogin()">Login with Facebook</button>
+<button type="button" class="btn btn-danger btn-large" ng-show="logged" ng-disabled="!facebookReady" ng-click="logout()">Logout</button>
+          

@@ -6,14 +6,18 @@ angular.module('nodeserverApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'ui.router'
+  'ui.router',
+  'facebook',
+  'directive.g+signin'
 ])
-  .config(function ($routeProvider, $locationProvider, $httpProvider , $stateProvider , $urlRouterProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider , $stateProvider , $urlRouterProvider, FacebookProvider) {
+
+    FacebookProvider.init('470123746363919');
 
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'partials/main',
+            templateUrl: 'partials/application/main',
             controller: 'MainCtrl'
         })
         .state('account', {
