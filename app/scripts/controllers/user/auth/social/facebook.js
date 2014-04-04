@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('nodeserverApp')
-    .controller('UserAuthSocialFacebookCtrl', function ($scope, $location, $timeout, Auth, Facebook) {
+    .controller('UserAuthSocialFacebookCtrl', function ($scope, $state,$rootScope, $location, $timeout, Auth, Facebook) {
         // Define user empty data :/
-        $scope.user = {};
+        $scope.userFacebook = {};
 
         // Defining user logged status
         $scope.logged = false;
-
+        
         // And some fancy flags to display messages upon user status change
         $scope.byebye = false;
         $scope.salutation = false;
@@ -63,7 +63,9 @@ angular.module('nodeserverApp')
                  * Using $scope.$apply since this happens outside angular framework.
                  */
                 $scope.$apply(function() {
-                    $scope.user = response;
+                    $scope.userFacebook = response;
+                    //console.log(response);
+                    $rootScope.$broadcast('event:facebook-success', response);
                 });
 
             });
@@ -75,7 +77,7 @@ angular.module('nodeserverApp')
         $scope.logout = function() {
             Facebook.logout(function() {
                 $scope.$apply(function() {
-                    $scope.user   = {};
+                    $scope.userFacebook   = {};
                     $scope.logged = false;
                 });
             });

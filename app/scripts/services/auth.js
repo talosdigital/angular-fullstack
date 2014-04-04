@@ -67,7 +67,25 @@ angular.module('nodeserverApp')
             return cb(err);
           }).$promise;
       },
+        /**
+         * Create a new user
+         *
+         * @param  {Object}   user     - user info
+         * @param  {Function} callback - optional
+         * @return {Promise}
+         */
+        facebookLogin: function(user, callback) {
+            var cb = callback || angular.noop;
 
+            return User.save(user,
+                function(user) {
+                    $rootScope.currentUser = user;
+                    return cb(user);
+                },
+                function(err) {
+                    return cb(err);
+                }).$promise;
+        },
       /**
        * Change password
        * 

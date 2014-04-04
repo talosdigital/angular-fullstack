@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('UserAuthLoginCtrl', function ($scope, Auth, $location) {
+  .controller('UserAuthLoginCtrl', function ($scope,$state, Auth, $location) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -15,7 +15,7 @@ angular.module('nodeserverApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $state.transitionTo("account.welcome");
         })
         .catch( function(err) {
           err = err.data;

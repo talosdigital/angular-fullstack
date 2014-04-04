@@ -1,10 +1,23 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('UserAuthSignupCtrl', function ($scope, Auth, $location) {
+  .controller('UserAuthSignupCtrl', function ($scope, $state, Auth) {
     $scope.user = {};
     $scope.errors = {};
-
+    $scope.$on('event:facebook-success', function (event, args) {
+        Auth.facebookLogin({
+            name: args.name,
+            email: args.email,
+            password: args.id,
+        })
+        .then( function() {
+            // Account created, redirect to home
+                $state.transitionTo("account.welcome");
+        })
+        .catch( function(err) {
+            console.log(err);
+        });
+    });
     $scope.register = function(form) {
       $scope.submitted = true;
   
@@ -16,7 +29,7 @@ angular.module('nodeserverApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $state.transitionTo("account.welcome");
         })
         .catch( function(err) {
           err = err.data;

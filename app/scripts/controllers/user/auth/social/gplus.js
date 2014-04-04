@@ -5,15 +5,15 @@ angular.module('nodeserverApp')
         $scope.signoutPlus = false;
 
         $scope.$on('event:google-plus-signin-success', function (event,authResult) {
-
-            $scope.signoutPlus = true;
             // Send login to server or save into cookie
+            console.log(authResult);
             gapi.client.load('plus','v1', function(){
                 var request = gapi.client.plus.people.get({
                     'userId': 'me'
                 });
                 request.execute(function(resp) {
-                    console.log(resp);
+                    $scope.plusname = resp.displayName;
+                    $scope.signoutPlus = true;
                 });
             });
         });
