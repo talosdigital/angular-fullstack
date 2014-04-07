@@ -14,7 +14,7 @@
     "angular-bootstrap": "*",
     "angular-ui-router": "*",
     "angular-facebook": "0.2.0",
-    "angular-directive.g-signin": "0.1.0"
+    "angular-directive.g-signin": "*"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
