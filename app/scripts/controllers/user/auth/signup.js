@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('UserAuthSignupCtrl', function ($scope, $state, Auth) {
+  .controller('UserAuthSignupCtrl', function ($scope, $state,$resource, Auth) {
     $scope.user = {};
     $scope.errors = {};
     $scope.$on('event:facebook-success', function (event, args) {
-        console.log(args);
-        Auth.facebookLogin({
+
+        /*Auth.facebookLogin({
             email: args.email
         })
         .then( function(success) {
@@ -34,7 +34,7 @@ angular.module('nodeserverApp')
                     });
                 });
             }
-        });
+        });*/
     });
 
     $scope.register = function(form) {

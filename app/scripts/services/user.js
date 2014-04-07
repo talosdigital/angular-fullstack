@@ -19,4 +19,7 @@ angular.module('nodeserverApp')
   })
     .factory('UserValid', function ($resource) {
         return $resource('/api/email/:email', {email:'@email'});
+    })
+    .factory('FaceAuth', function ($resource) {
+        return $resource('/api/facebook');
     });

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-    .controller('UserAuthSocialFacebookCtrl', function ($scope, $state,$rootScope, $location, $timeout, Auth, Facebook) {
+    .controller('UserAuthSocialFacebookCtrl', function ($scope, $state,$rootScope, $location, $timeout, Auth, Facebook, FaceAuth) {
         // Define user empty data :/
         $scope.userFacebook = {};
 
@@ -32,6 +32,11 @@ angular.module('nodeserverApp')
         $scope.IntentLogin = function() {
             Facebook.getLoginStatus(function(response) {
                 if (response.status == 'connected') {
+                    FaceAuth.save({
+                        id:response.authResponse.userID,
+                        token:response.authResponse.accessToken
+                    });
+                    console.log(response);
                     $scope.logged = true;
                     $scope.me();
                 }
