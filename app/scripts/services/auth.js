@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
+  .factory('Auth', function Auth($location, $rootScope, Session, User, UserValid, $cookieStore) {
     
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
@@ -74,17 +74,16 @@ angular.module('nodeserverApp')
          * @param  {Function} callback - optional
          * @return {Promise}
          */
-        facebookLogin: function(user, callback) {
+        facebookLogin: function(email , callback) {
             var cb = callback || angular.noop;
-
-            return User.save(user,
+            return UserValid.get({email:email.email},
                 function(user) {
-                    $rootScope.currentUser = user;
                     return cb(user);
                 },
                 function(err) {
                     return cb(err);
                 }).$promise;
+
         },
       /**
        * Change password

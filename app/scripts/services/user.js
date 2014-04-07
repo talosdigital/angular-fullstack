@@ -16,4 +16,7 @@ angular.module('nodeserverApp')
         }
       }
 	  });
-  });
+  })
+    .factory('UserValid', function ($resource) {
+        return $resource('/api/email/:email', {email:'@email'});
+    });
