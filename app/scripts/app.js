@@ -80,11 +80,11 @@ angular.module('nodeserverApp', [
     $locationProvider.html5Mode(true);
       
     // Intercept 401s and 403s and redirect you to login
-    $httpProvider.interceptors.push(['$q', '$location', function($q, $location) {
+    $httpProvider.interceptors.push(['$q', '$location','$injector', function($q, $location , $injector) {
       return {
         'responseError': function(response) {
           if(response.status === 401 || response.status === 403) {
-            $location.path('/user/login');
+              $injector.get('$state').transitionTo('login');
             return $q.reject(response);
           }
           else {

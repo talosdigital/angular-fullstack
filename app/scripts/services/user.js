@@ -2,9 +2,8 @@
 
 angular.module('nodeserverApp')
   .factory('User', function ($resource) {
-    return $resource('/api/users/:id', {
-      id: '@id'
-    }, { //parameters default
+    return $resource('/api/users',
+        { //parameters default
       update: {
         method: 'PUT',
         params: {}
@@ -16,10 +15,4 @@ angular.module('nodeserverApp')
         }
       }
 	  });
-  })
-    .factory('UserValid', function ($resource) {
-        return $resource('/api/email/:email', {email:'@email'});
-    })
-    .factory('FaceAuth', function ($resource) {
-        return $resource('/api/facebook');
-    });
+  });

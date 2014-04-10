@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .factory('Auth', function Auth($location, $rootScope, Session, User, UserValid, $cookieStore) {
+  .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
     
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
@@ -75,14 +75,7 @@ angular.module('nodeserverApp')
          * @return {Promise}
          */
         facebookLogin: function(email , callback) {
-            var cb = callback || angular.noop;
-            return UserValid.get({email:email.email},
-                function(user) {
-                    return cb(user);
-                },
-                function(err) {
-                    return cb(err);
-                }).$promise;
+
 
         },
       /**
