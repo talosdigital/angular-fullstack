@@ -5,8 +5,7 @@
             <li ng-class="{active: isActive('/user/account/index')}"><a ui-sref="account.welcome">Account Dashboard</a></li>
             <li ng-class="{active: isActive('/user/account/information')}"><a ui-sref="account.information">Account Information</a></li>
             <li ng-class="{active: isActive('/user/account/address/view')}"><a ui-sref="account.address.view">Address Book</a></li>
-            <li><a ng-href="">My Wishlist</a></li>
-            <li><a ng-href="">Newsletter Subscription</a></li>
+            <li ng-class="{active: isActive('/user/account/social')}"><a ui-sref="account.social">Merge social networks</a></li>
         </ul>
     </div>
     <div class="col-sm-8">

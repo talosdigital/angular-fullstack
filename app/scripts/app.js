@@ -58,6 +58,13 @@ angular.module('nodeserverApp', [
             authenticate: true
 
         })
+        .state('account.social', {
+            url: '/social',
+            templateUrl: 'partials/user/account/social',
+            controller: 'UserAccountSocialCtrl',
+            authenticate: true
+
+        })
         .state('login', {
             url: '/user/auth/login',
             templateUrl: 'partials/user/auth/login',

@@ -32,20 +32,8 @@ angular.module('nodeserverApp')
         $scope.IntentLogin = function() {
             Facebook.getLoginStatus(function(response) {
                 if (response.status == 'connected') {
-                    Auth.createUser({
-                        id:response.authResponse.userID,
-                        token:response.authResponse.accessToken,
-                        facebook: true
-                    })
-                    .then( function() {
-                        // Account created, redirect to home
-                        $state.transitionTo("account.welcome");
-                    })
-                    .catch( function(err) {
-                        console.log(err);
-                    });
                     $scope.logged = true;
-                    $scope.me();
+                    $rootScope.$broadcast('event:facebook-success', response);
                 }
                 else{
                     $scope.login();
@@ -60,7 +48,7 @@ angular.module('nodeserverApp')
             Facebook.login(function(response) {
                 if (response.status == 'connected') {
                     $scope.logged = true;
-                    $scope.me();
+                    $scope.IntentLogin();
                 }
 
             },{scope: 'email'});
@@ -77,7 +65,6 @@ angular.module('nodeserverApp')
                 $scope.$apply(function() {
                     $scope.userFacebook = response;
                     //console.log(response);
-                    $rootScope.$broadcast('event:facebook-success', response);
                 });
 
             });

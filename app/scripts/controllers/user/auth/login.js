@@ -5,7 +5,35 @@ angular.module('nodeserverApp')
         $scope.user = {};
         $scope.errors = {};
 
-        $scope.login = function(form) {
+        $scope.$on('event:facebook-success', function (event, args) {
+            Auth.createUser({
+                id:args.authResponse.userID,
+                token:args.authResponse.accessToken,
+                facebook: true
+            })
+            .then( function() {
+                // Account created, redirect to home
+                $state.transitionTo("account.welcome");
+            })
+            .catch( function(err) {
+                if(err.data.errors.email){
+                    Auth.login({
+                        email:args.authResponse.userID,
+                        password:args.authResponse.accessToken,
+                        facebook: true
+                    })
+                    .then( function() {
+                        // Logged in, redirect to home
+                        $state.transitionTo("account.welcome");
+                    })
+                    .catch( function(err) {
+                        console.log(err);
+                    });
+                }
+            });
+        });
+
+        $scope.loginform = function(form) {
             $scope.submitted = true;
 
             if(form.$valid) {

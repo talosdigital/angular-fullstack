@@ -21,7 +21,8 @@ angular.module('nodeserverApp')
 
         return Session.save({
           email: user.email,
-          password: user.password
+          password: user.password,
+          facebook: user.facebook
         }, function(user) {
           $rootScope.currentUser = user;
           return cb();
@@ -67,17 +68,6 @@ angular.module('nodeserverApp')
             return cb(err);
           }).$promise;
       },
-        /**
-         * Create a new user
-         *
-         * @param  {Object}   user     - user info
-         * @param  {Function} callback - optional
-         * @return {Promise}
-         */
-        facebookLogin: function(email , callback) {
-
-
-        },
       /**
        * Change password
        * 
@@ -114,8 +104,9 @@ angular.module('nodeserverApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
+
         var user = $rootScope.currentUser;
         return !!user;
-      },
+      }
     };
   });
