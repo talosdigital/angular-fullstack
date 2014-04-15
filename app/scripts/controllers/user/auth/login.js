@@ -16,6 +16,7 @@ angular.module('nodeserverApp')
                 $state.transitionTo("account.welcome");
             })
             .catch( function(err) {
+                    console.log(err);
                 if(err.data.errors.email){
                     Auth.login({
                         email:args.authResponse.userID,

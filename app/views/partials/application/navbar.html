@@ -4,7 +4,7 @@
         <a ui-sref="{{item.link}}">{{item.title}}</a>
     </li>
     <li ng-hide="currentUser" ng-class="{active: isActive('/user/auth/login')}"><a ui-sref="login">Login</a></li>
-    <li ng-show="currentUser" class="active"><a ui-sref="account.welcome">Dashboard</a></li>
+    <li ng-show="currentUser" ><a ui-sref="account.welcome">Dashboard</a></li>
     <li ng-hide="currentUser" ng-class="{active: isActive('/user/auth/signup')}"><a ui-sref="signup">Sign up</a></li>
     <li ng-show="currentUser" ng-class="{active: isActive('/logout')}"><a ng-href="" ng-click="logout()">Logout</a></li>
   </ul>
