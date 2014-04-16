@@ -17,3 +17,13 @@ angular.module('nodeserverApp')
             }
         });
     })
+    .factory('UserMerge', function ($resource) {
+        return $resource('/api/users/merge', {
+
+        },{
+            update: {
+                method: 'PUT',
+                params: {id: '@id'}
+            }
+        });
+    })

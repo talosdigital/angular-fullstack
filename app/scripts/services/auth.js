@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
+  .factory('Auth', function Auth($location, $rootScope, Session, User, UserMerge, $cookieStore) {
     
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
@@ -88,6 +88,19 @@ angular.module('nodeserverApp')
           return cb(err);
         }).$promise;
       },
+
+        //Merge Facebook account with current one
+        mergeAccount: function(user, callback) {
+            var cb = callback || angular.noop;
+
+            return UserMerge.update(user,
+                function(success) {
+                    return cb(success);
+                },
+                function(err) {
+                    return cb(err);
+                }).$promise;
+        },
 
       /**
        * Gets all available info on authenticated user
