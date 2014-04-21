@@ -2,34 +2,34 @@
 
 angular.module('nodeserverApp')
   .controller('UserAuthSignupCtrl', function ($scope, $state,$resource, Auth) {
+    $scope.facebookTitle = 'Sign up with facebook';
     $scope.user = {};
     $scope.errors = {};
     $scope.$on('event:facebook-success', function (event, args) {
-        Auth.createUser({
-            id:args.authResponse.userID,
-            token:args.authResponse.accessToken,
+        Auth.login({
+            email:args.authResponse.userID,
+            password:args.authResponse.accessToken,
             facebook: true
         })
-        .then( function() {
-            // Account created, redirect to home
-            $state.transitionTo("account.welcome");
-        })
-        .catch( function(err) {
-            if(err.data.errors.email){
-                Auth.login({
-                    email:args.authResponse.userID,
-                    password:args.authResponse.accessToken,
+            .then( function() {
+                // Logged in, redirect to home
+                $state.transitionTo("account.welcome");
+            })
+            .catch( function(err) {
+                console.log(err);
+                Auth.createUser({
+                    id:args.authResponse.userID,
+                    token:args.authResponse.accessToken,
                     facebook: true
                 })
-                .then( function() {
-                    // Logged in, redirect to home
-                    $state.transitionTo("account.welcome");
-                })
-                .catch( function(err) {
+                    .then( function() {
+                        // Account created, redirect to home
+                        $state.transitionTo("account.welcome");
+                    })
+                    .catch( function(err) {
                         console.log(err);
-                });
-            }
-        });
+                    });
+            });
     });
     $scope.register = function(form) {
       $scope.submitted = true;

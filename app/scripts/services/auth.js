@@ -102,6 +102,18 @@ angular.module('nodeserverApp')
                 }).$promise;
         },
 
+        unmergeAccount: function(user, callback) {
+            var cb = callback || angular.noop;
+
+            return UserMerge.delete(
+                function(success) {
+                    return cb(success);
+                },
+                function(err) {
+                    return cb(err);
+                }).$promise;
+        },
+
       /**
        * Gets all available info on authenticated user
        * 

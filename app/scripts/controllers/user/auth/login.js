@@ -2,35 +2,34 @@
 
 angular.module('nodeserverApp')
   .controller('UserAuthLoginCtrl', function ($scope,$state, Auth, $location) {
+        $scope.facebookTitle = 'Login with facebook';
         $scope.user = {};
         $scope.errors = {};
 
         $scope.$on('event:facebook-success', function (event, args) {
-            Auth.createUser({
-                id:args.authResponse.userID,
-                token:args.authResponse.accessToken,
+            Auth.login({
+                email:args.authResponse.userID,
+                password:args.authResponse.accessToken,
                 facebook: true
             })
             .then( function() {
-                // Account created, redirect to home
+                // Logged in, redirect to home
                 $state.transitionTo("account.welcome");
             })
             .catch( function(err) {
+                console.log(err);
+                Auth.createUser({
+                    id:args.authResponse.userID,
+                    token:args.authResponse.accessToken,
+                    facebook: true
+                })
+                .then( function() {
+                    // Account created, redirect to home
+                    $state.transitionTo("account.welcome");
+                })
+                .catch( function(err) {
                     console.log(err);
-                if(err.data.errors.email){
-                    Auth.login({
-                        email:args.authResponse.userID,
-                        password:args.authResponse.accessToken,
-                        facebook: true
-                    })
-                    .then( function() {
-                        // Logged in, redirect to home
-                        $state.transitionTo("account.welcome");
-                    })
-                    .catch( function(err) {
-                        console.log(err);
-                    });
-                }
+                });
             });
         });
 
