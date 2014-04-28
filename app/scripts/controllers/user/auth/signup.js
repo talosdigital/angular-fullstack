@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('UserAuthSignupCtrl', function ($scope, $state,$resource, Auth) {
+  .controller('UserAuthSignupCtrl', function ($scope, $state,$rootScope,$resource, Auth) {
     $scope.facebookTitle = 'Sign up with facebook';
+    $scope.facebooklogout = 'Please wait';
     $scope.user = {};
     $scope.errors = {};
+        $rootScope.loggedface = false;
     $scope.$on('event:facebook-success', function (event, args) {
         Auth.login({
             email:args.authResponse.userID,

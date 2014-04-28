@@ -4,9 +4,6 @@ angular.module('nodeserverApp')
     .controller('UserAuthSocialFacebookCtrl', function ($scope, $state,$rootScope, $location, $timeout, Auth, Facebook) {
         // Define user empty data :/
         $scope.userFacebook = {};
-
-        // Defining user logged status
-        $scope.logged = false;
         
         // And some fancy flags to display messages upon user status change
         $scope.byebye = false;
@@ -32,7 +29,7 @@ angular.module('nodeserverApp')
         $scope.IntentLogin = function() {
             Facebook.getLoginStatus(function(response) {
                 if (response.status == 'connected') {
-                    $scope.logged = true;
+                    $rootScope.loggedface = true;
                     $rootScope.$broadcast('event:facebook-success', response);
                 }
                 else{
@@ -47,7 +44,7 @@ angular.module('nodeserverApp')
         $scope.login = function() {
             Facebook.login(function(response) {
                 if (response.status == 'connected') {
-                    $scope.logged = true;
+                    $rootScope.loggedface = true;
                     $scope.IntentLogin();
                 }
 
@@ -77,7 +74,8 @@ angular.module('nodeserverApp')
             Facebook.logout(function() {
                 $scope.$apply(function() {
                     $scope.userFacebook   = {};
-                    $scope.logged = false;
+                    $rootScope.loggedface = false;
+                    $rootScope.$broadcast('event:facebook-logout');
                 });
             });
         }

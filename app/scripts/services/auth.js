@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .factory('Auth', function Auth($location, $rootScope, Session, User, UserMerge, $cookieStore) {
+  .factory('Auth', function Auth($location, $rootScope, Session, User, UserMerge,facebookCheck, $cookieStore) {
     
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
     $cookieStore.remove('user');
+    var passchange = null;
 
     return {
 
@@ -89,6 +90,13 @@ angular.module('nodeserverApp')
         }).$promise;
       },
 
+      setPass: function(state){
+          passchange = state;
+      },
+      getPass: function(){
+          return passchange;
+      },
+
         //Merge Facebook account with current one
         mergeAccount: function(user, callback) {
             var cb = callback || angular.noop;
@@ -106,6 +114,18 @@ angular.module('nodeserverApp')
             var cb = callback || angular.noop;
 
             return UserMerge.delete(
+                function(success) {
+                    return cb(success);
+                },
+                function(err) {
+                    return cb(err);
+                }).$promise;
+        },
+
+        checkfacebook: function(user, callback){
+            var cb = callback || angular.noop;
+
+            return facebookCheck.update(user,
                 function(success) {
                     return cb(success);
                 },

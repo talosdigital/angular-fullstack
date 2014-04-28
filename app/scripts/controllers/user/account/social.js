@@ -2,9 +2,24 @@
 
 angular.module('nodeserverApp')
     .controller('UserAccountSocialCtrl', function ($scope, $location,$routeParams,$rootScope, Auth) {
-        console.log($rootScope.currentUser);
         $scope.facebookTitle = 'Connect with facebook';
-        $scope.isFacebook = true;
+        $scope.facebooklogout = 'Disconnect with facebook';
+        Auth.checkfacebook()
+            .then(function(res){
+                console.log(res);
+                if(res.valid){
+                    $rootScope.loggedface = true;
+                }
+                else{
+                    $rootScope.loggedface = false;
+                }
+
+            })
+            .catch(function(err){
+                $scope.alerts = [
+                    { type: 'danger', msg: 'Something is wrong' }
+                ];
+            });
         $scope.$on('event:facebook-success', function (event, args) {
             Auth.mergeAccount(args)
             .then(function(){
@@ -18,11 +33,11 @@ angular.module('nodeserverApp')
                 ];
             });
         });
-        $scope.unmerge = function(){
+        $scope.$on('event:facebook-logout', function (event) {
             Auth.unmergeAccount()
                 .then(function(){
                     $scope.alerts = [
-                        { type: 'success', msg: 'Your account has been successfully unmerged' }
+                        { type: 'warning', msg: 'Your account has been successfully unmerged' }
                     ];
                 })
                 .catch(function(err){
@@ -30,7 +45,8 @@ angular.module('nodeserverApp')
                         { type: 'danger', msg: 'Something is wrong, please try again later' }
                     ];
                 });
-        };
+        });
+
         $scope.closeAlert = function(index) {
             $scope.alerts.splice(index, 1);
             $scope.error = null;

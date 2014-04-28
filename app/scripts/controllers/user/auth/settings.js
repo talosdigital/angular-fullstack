@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('UserAuthSettingsCtrl', function ($scope, User, Auth) {
+  .controller('UserAuthSettingsCtrl', function ($scope,$state,$rootScope, User, Auth) {
     $scope.errors = {};
 
     $scope.closeAlert = function(index) {
@@ -15,9 +15,8 @@ angular.module('nodeserverApp')
       if(form.$valid) {
         Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
         .then( function() {
-            $scope.alerts = [
-                { type: 'success', msg: 'Password successfully changed.' }
-            ];
+            Auth.setPass(true);
+            $state.transitionTo("account.welcome");
         })
         .catch( function() {
           form.password.$setValidity('mongoose', false);

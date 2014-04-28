@@ -27,3 +27,13 @@ angular.module('nodeserverApp')
             }
         });
     })
+    .factory('facebookCheck', function ($resource) {
+        return $resource('/api/users/check', {
+
+        },{
+            update: {
+                method: 'PUT',
+                params: {id: '@id'}
+            }
+        });
+    });
