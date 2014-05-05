@@ -76,7 +76,6 @@ body {
     margin: 5px 0px;
 }
 #wrapper {
-    padding-right: 250px;
     transition: all 0.4s ease 0s;
 }
 
@@ -91,6 +90,8 @@ body {
     z-index: 1000;
     transition: all 0.4s ease 0s;
     top:0;
+    box-shadow: 3px 0px 10px -6px #000 inset;
+    display: none;
 }
 
 #page-content-wrapper {
@@ -174,13 +175,25 @@ body {
 }
 
 @media (max-width:768px) {
-
+    .nav-pills > li > a {
+        border-radius: 1px;
+        background: #e6e6e6;
+        color: #000;
+        border-bottom: 1px solid #ccc;
+    }
+    .nav-stacked > li + li{
+        margin-top: 0;
+    }
     #wrapper {
         padding-right: 0;
     }
 
     #sidebar-wrapper {
         right: 0;
+        display: block;
+    }
+    .header .nav.nav-pills.pull-right{
+        display: none;
     }
 
     #wrapper.active {
