@@ -6,7 +6,6 @@ angular.module('nodeserverApp')
         $scope.facebooklogout = 'Disconnect with facebook';
         Auth.checkfacebook()
             .then(function(res){
-                console.log(res);
                 if(res.valid){
                     $rootScope.loggedface = true;
                 }

@@ -1,7 +1,7 @@
 <div ng-include="'partials/application/navbar'"></div>
 
 <div class="jumbotron">
-  <h1>Talos Boiler Welcome <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
+  <h1>Talos Full-Stack Welcome <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
   <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
 </div>
 
@@ -11,14 +11,3 @@
       <p>{{thing.info}}</p>
   </div>
 </div>
-
-<li class="dropdown">
-    <a class="dropdown-toggle">
-        Click me for a dropdown, yo!
-    </a>
-    <ul class="dropdown-menu">
-        <li ng-repeat="choice in items">
-            <a>{{choice}}</a>
-        </li>
-    </ul>
-</li>
