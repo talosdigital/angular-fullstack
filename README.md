@@ -2,7 +2,7 @@
 <p>Talos Angular FullStack is a front end framework designed and developed to work with PHP, JAVA and NodeJS.</p>
 <h2>Prerequisites</h2>
 <ul>
-    <li>MongoDB - Download and Install MongoDB.</li>
+    <li>MongoDB - Download and Install MongoDB. it must be running for database usage</li>
     <li>NodeJS - Download and install NodeJS.</li>
 </ul>
 <h2>Backend options</h2>
