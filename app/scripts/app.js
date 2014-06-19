@@ -12,7 +12,7 @@ angular.module('nodeserverApp', [
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider , $stateProvider , $urlRouterProvider, FacebookProvider) {
 
-    FacebookProvider.init('470123746363919');
+    FacebookProvider.init('324410064378636');
 
     $stateProvider
         .state('home', {

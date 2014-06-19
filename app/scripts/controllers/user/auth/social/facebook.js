@@ -28,6 +28,7 @@ angular.module('nodeserverApp')
          */
         $scope.IntentLogin = function() {
             Facebook.getLoginStatus(function(response) {
+                console.log(response);
                 if (response.status == 'connected') {
                     $rootScope.loggedface = true;
                     $rootScope.$broadcast('event:facebook-success', response);

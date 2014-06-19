@@ -1,21 +1,29 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .factory('Auth', function Auth($location, $rootScope, Session, User, UserMerge,facebookCheck, $cookieStore) {
-    
+  .factory('Auth', function Auth($location, $rootScope,$http, Session, User, UserMerge,facebookCheck, $cookieStore) {
+
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
-    $cookieStore.remove('user');
+    if($rootScope.currentUser){
+      $cookieStore.remove('user');
+    }
+    else{
+      $http.get('api/public/session').success(function(data) {
+        $rootScope.currentUser = data;
+      });
+    }
+
     var passchange = null;
 
     return {
 
       /**
        * Authenticate user
-       * 
+       *
        * @param  {Object}   user     - login info
        * @param  {Function} callback - optional
-       * @return {Promise}            
+       * @return {Promise}
        */
       login: function(user, callback) {
         var cb = callback || angular.noop;
@@ -34,9 +42,9 @@ angular.module('nodeserverApp')
 
       /**
        * Unauthenticate user
-       * 
+       *
        * @param  {Function} callback - optional
-       * @return {Promise}           
+       * @return {Promise}
        */
       logout: function(callback) {
         var cb = callback || angular.noop;
@@ -52,17 +60,20 @@ angular.module('nodeserverApp')
 
       /**
        * Create a new user
-       * 
+       *
        * @param  {Object}   user     - user info
        * @param  {Function} callback - optional
-       * @return {Promise}            
+       * @return {Promise}
        */
       createUser: function(user, callback) {
+        currentUser = user;
+        user = $.param(user);
+        console.log(user);
         var cb = callback || angular.noop;
 
         return User.save(user,
-          function(user) {
-            $rootScope.currentUser = user;
+          function(userResponse) {
+            $rootScope.currentUser = currentUser;
             return cb(user);
           },
           function(err) {
@@ -71,11 +82,11 @@ angular.module('nodeserverApp')
       },
       /**
        * Change password
-       * 
-       * @param  {String}   oldPassword 
-       * @param  {String}   newPassword 
+       *
+       * @param  {String}   oldPassword
+       * @param  {String}   newPassword
        * @param  {Function} callback    - optional
-       * @return {Promise}              
+       * @return {Promise}
        */
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
@@ -136,7 +147,7 @@ angular.module('nodeserverApp')
 
       /**
        * Gets all available info on authenticated user
-       * 
+       *
        * @return {Object} user
        */
       currentUser: function() {
@@ -145,7 +156,7 @@ angular.module('nodeserverApp')
 
       /**
        * Simple check to see if a user is logged in
-       * 
+       *
        * @return {Boolean}
        */
       isLoggedIn: function() {

@@ -35,7 +35,7 @@ angular.module('nodeserverApp')
     });
     $scope.register = function(form) {
       $scope.submitted = true;
-  
+
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
@@ -47,6 +47,7 @@ angular.module('nodeserverApp')
           $state.transitionTo("account.welcome");
         })
         .catch( function(err) {
+          console.log(err);
           err = err.data;
           $scope.errors = {};
 

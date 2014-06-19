@@ -2,23 +2,28 @@
 
 angular.module('nodeserverApp')
     .factory('User', function ($resource) {
-        return $resource('/api/users/:id', {
+        return $resource('api/user/auth/signup/:id', {
 
         }, { //parameters default
             update: {
                 method: 'PUT',
-                params: {id: '@id'}
+                params: {id: '@id'},
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
             },
             get: {
                 method: 'GET',
                 params: {
                     id:'me'
                 }
+            },
+            save:{
+                method: 'POST',
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
             }
         });
     })
     .factory('UserMerge', function ($resource) {
-        return $resource('/api/users/merge', {
+        return $resource('api/users/merge', {
 
         },{
             update: {
@@ -28,7 +33,7 @@ angular.module('nodeserverApp')
         });
     })
     .factory('facebookCheck', function ($resource) {
-        return $resource('/api/users/check', {
+        return $resource('api/users/check', {
 
         },{
             update: {

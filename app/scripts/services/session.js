@@ -2,5 +2,5 @@
 
 angular.module('nodeserverApp')
   .factory('Session', function ($resource) {
-    return $resource('/api/session/');
+    return $resource('api/public/session/');
   });
