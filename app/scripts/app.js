@@ -82,7 +82,7 @@ angular.module('nodeserverApp', [
 
     $urlRouterProvider.otherwise("/");
 
-    $locationProvider.html5Mode(false);
+    $locationProvider.html5Mode(true);
 
     // Intercept 401s and 403s and redirect you to login
     $httpProvider.interceptors.push(['$q', '$location','$injector', function($q, $location , $injector) {
