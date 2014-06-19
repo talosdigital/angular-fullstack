@@ -7,6 +7,6 @@ heroku
 /views
 dist
 .idea
-/api
+/app/api
 .project
 .pydevproject

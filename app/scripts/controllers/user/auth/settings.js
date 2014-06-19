@@ -13,7 +13,11 @@ angular.module('nodeserverApp')
       $scope.submitted = true;
 
       if(form.$valid) {
-        Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
+        Auth.changePassword( {
+          currentPassword: $scope.user.oldPassword,
+          newPassword: $scope.user.newPassword,
+          newPasswordVerify: $scope.user.newPassword
+        })
         .then( function() {
             Auth.setPass(true);
             $state.transitionTo("account.welcome");

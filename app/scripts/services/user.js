@@ -22,13 +22,33 @@ angular.module('nodeserverApp')
             }
         });
     })
+    .factory('Passwords', function ($resource) {
+        return $resource('api/user/profile/change-password', {
+
+        }, { //parameters default
+            update: {
+                method: 'POST',
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+            }
+        });
+    })
     .factory('UserMerge', function ($resource) {
-        return $resource('api/users/merge', {
+        return $resource('api/user/auth/merge', {
 
         },{
             update: {
-                method: 'PUT',
-                params: {id: '@id'}
+                method: 'POST',
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+            }
+        });
+    })
+    .factory('UserUnMerge', function ($resource) {
+        return $resource('api/user/auth/unmerge', {
+
+        },{
+            update: {
+                method: 'POST',
+                headers : {'Content-Type': 'application/x-www-form-urlencoded'}
             }
         });
     })

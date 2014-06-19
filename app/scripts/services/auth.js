@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .factory('Auth', function Auth($location, $rootScope,$http, Session, User, UserMerge,facebookCheck, $cookieStore) {
+  .factory('Auth', function Auth($location, $rootScope,$http, Session, Logout, User, UserMerge, Passwords, UserUnMerge, facebookCheck, $cookieStore) {
 
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
@@ -9,7 +9,7 @@ angular.module('nodeserverApp')
       $cookieStore.remove('user');
     }
     else{
-      $http.get('api/public/session').success(function(data) {
+      $http.get('api/user/profile').success(function(data) {
         $rootScope.currentUser = data;
       });
     }
@@ -27,12 +27,9 @@ angular.module('nodeserverApp')
        */
       login: function(user, callback) {
         var cb = callback || angular.noop;
-
-        return Session.save({
-          email: user.email,
-          password: user.password,
-          facebook: user.facebook
-        }, function(user) {
+        
+        user = $.param(user);
+        return Session.save(user, function(user) {
           $rootScope.currentUser = user;
           return cb();
         }, function(err) {
@@ -49,7 +46,7 @@ angular.module('nodeserverApp')
       logout: function(callback) {
         var cb = callback || angular.noop;
 
-        return Session.delete(function() {
+        return Logout.delete(function() {
             $rootScope.currentUser = null;
             return cb();
           },
@@ -66,14 +63,13 @@ angular.module('nodeserverApp')
        * @return {Promise}
        */
       createUser: function(user, callback) {
-        currentUser = user;
         user = $.param(user);
         console.log(user);
         var cb = callback || angular.noop;
 
         return User.save(user,
           function(userResponse) {
-            $rootScope.currentUser = currentUser;
+            $rootScope.currentUser = userResponse;
             return cb(user);
           },
           function(err) {
@@ -88,13 +84,12 @@ angular.module('nodeserverApp')
        * @param  {Function} callback    - optional
        * @return {Promise}
        */
-      changePassword: function(oldPassword, newPassword, callback) {
+      changePassword: function(passwords, callback) {
         var cb = callback || angular.noop;
+        passwords = $.param(passwords);
 
-        return User.update({
-          oldPassword: oldPassword,
-          newPassword: newPassword
-        }, function(user) {
+        return Passwords.update(passwords, 
+          function(user) {
           return cb(user);
         }, function(err) {
           return cb(err);
@@ -111,6 +106,7 @@ angular.module('nodeserverApp')
         //Merge Facebook account with current one
         mergeAccount: function(user, callback) {
             var cb = callback || angular.noop;
+            user = $.param(user);
 
             return UserMerge.update(user,
                 function(success) {
@@ -123,8 +119,9 @@ angular.module('nodeserverApp')
 
         unmergeAccount: function(user, callback) {
             var cb = callback || angular.noop;
+            user = $.param(user);
 
-            return UserMerge.delete(
+            return UserUnMerge.update(user,
                 function(success) {
                     return cb(success);
                 },

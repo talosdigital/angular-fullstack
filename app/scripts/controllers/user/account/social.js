@@ -4,23 +4,26 @@ angular.module('nodeserverApp')
     .controller('UserAccountSocialCtrl', function ($scope, $location,$routeParams,$rootScope, Auth) {
         $scope.facebookTitle = 'Connect with facebook';
         $scope.facebooklogout = 'Disconnect with facebook';
-        Auth.checkfacebook()
-            .then(function(res){
-                if(res.valid){
-                    $rootScope.loggedface = true;
-                }
-                else{
-                    $rootScope.loggedface = false;
-                }
 
-            })
-            .catch(function(err){
-                $scope.alerts = [
-                    { type: 'danger', msg: 'Something is wrong' }
-                ];
-            });
+        $rootScope.loggedface = false;
+        var oauth = $rootScope.currentUser['oauth'];
+        if(oauth!=undefined){
+            for(var i=0; i < oauth.length; i++){
+                if(oauth[i].adapter == 'facebook'){
+                     $rootScope.facebookAccount = oauth[i]; 
+                     $rootScope.loggedface = true;
+                     break;
+                }
+            }
+        }
+
+       
         $scope.$on('event:facebook-success', function (event, args) {
-            Auth.mergeAccount(args)
+            Auth.mergeAccount({
+                facebookId: args.authResponse.userID,
+                facebookToken: args.authResponse.accessToken,
+                adapter: 'facebook'
+            })
             .then(function(){
                 $scope.alerts = [
                     { type: 'success', msg: 'Your account has been successfully merged' }
@@ -33,7 +36,13 @@ angular.module('nodeserverApp')
             });
         });
         $scope.$on('event:facebook-logout', function (event) {
-            Auth.unmergeAccount()
+            Auth.unmergeAccount({
+            
+                adapter: 'facebook',
+                facebookToken: $rootScope.facebookToken
+            
+                })
+
                 .then(function(){
                     $scope.alerts = [
                         { type: 'warning', msg: 'Your account has been successfully unmerged' }

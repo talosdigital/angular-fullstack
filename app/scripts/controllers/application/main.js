@@ -2,7 +2,7 @@
 
 angular.module('nodeserverApp')
   .controller('MainCtrl', function ($scope, $http) {
-    $http.get('api/public/awesomeThings').success(function(awesomeThings) {
+    $http.get('api/').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
     });
     $scope.items = [

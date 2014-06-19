@@ -8,7 +8,8 @@ angular.module('nodeserverApp')
         $scope.errors = {};
         $rootScope.loggedface = false;
         $scope.$on('event:facebook-success', function (event, args) {
-            Auth.login({
+            $rootScope.facebookToken = args.authResponse.accessToken;
+            /*Auth.login({
                 email:args.authResponse.userID,
                 password:args.authResponse.accessToken,
                 facebook: true
@@ -18,19 +19,18 @@ angular.module('nodeserverApp')
                 $state.transitionTo("account.welcome");
             })
             .catch( function(err) {
+                console.log(err);*/
+            Auth.login({
+                facebookId:args.authResponse.userID,
+                facebookToken:args.authResponse.accessToken,
+                adapter: 'facebook'
+            })
+            .then( function() {
+                // Account created, redirect to home
+                $state.transitionTo("account.welcome");
+            })
+            .catch( function(err) {
                 console.log(err);
-                Auth.createUser({
-                    id:args.authResponse.userID,
-                    token:args.authResponse.accessToken,
-                    facebook: true
-                })
-                .then( function() {
-                    // Account created, redirect to home
-                    $state.transitionTo("account.welcome");
-                })
-                .catch( function(err) {
-                    console.log(err);
-                });
             });
         });
 
