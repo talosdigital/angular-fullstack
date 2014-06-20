@@ -1,7 +1,27 @@
+<div ng-show='{{errorMessage}}'>
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{errorMessage}}
+    </div>
+</div>
+<div class="alert alert-success" ng-show='{{successMessage}}'>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    {{successMessage}}
+</div>
+
 <h2>Address Book</h2>
 <form class="form-inline address-form" name="form" ng-submit="login(form)" novalidate>
 
     <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+
+    <div class="form-group col-sm-12" ng-class="form.label.$invalid && submitted ? 'has-error' : ''">
+        <label class="sr-only">Address label</label>
+
+        <input type="text" name="label" class="form-control" ng-model="user.label" placeholder="Address label" required>
+        <p class="help-block" ng-show="form.FirstName.$invalid && submitted">
+            Please fill the address label
+        </p>
+    </div>
 
     <h3>Contact info</h3>
     <div class="form-group col-sm-6" ng-class="form.FirstName.$invalid && submitted ? 'has-error' : ''">
@@ -26,17 +46,6 @@
         <label class="sr-only">Company</label>
 
         <input type="text" name="company" class="form-control" ng-model="user.company"  placeholder="Company">
-    </div>
-    <div class="form-group col-sm-6">
-        <label class="sr-only">Telefone</label>
-
-        <input type="text" name="telefone" class="form-control" ng-model="user.phone"  placeholder="Phone Number">
-    </div>
-
-    <div class="form-group col-sm-6">
-        <label class="sr-only">Fax</label>
-
-        <input type="text" name="fax" class="form-control" ng-model="user.fax"  placeholder="Fax">
     </div>
     <h3>Address</h3>
     <div class="form-group col-sm-12">
@@ -69,6 +78,6 @@
     </div>
 
     <div class="form-group col-sm-12">
-        <button type="submit" class="btn btn-lg btn-primary"> Add </button>
+        <button type="button" class="btn btn-lg btn-primary" ng-click='addAddress()'> Add </button>
     </div>
 </form>

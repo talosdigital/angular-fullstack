@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .factory('Auth', function Auth($location, $rootScope,$http, Session, Logout, User, UserMerge, Passwords, UserUnMerge, facebookCheck, $cookieStore) {
+  .factory('Auth', function Auth($location, $rootScope,$http, Session, Logout, User, UserMerge, Passwords, UserUnMerge, facebookCheck, $cookieStore, $state) {
 
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
@@ -11,6 +11,7 @@ angular.module('nodeserverApp')
     else{
       $http.get('api/user/profile').success(function(data) {
         $rootScope.currentUser = data;
+        $state.transitionTo("account.welcome");
       });
     }
 

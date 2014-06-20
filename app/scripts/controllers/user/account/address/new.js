@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('UserAccountAddressNewCtrl', function ($scope, $location,$routeParams, Auth) {
+  .controller('UserAccountAddressNewCtrl', function ($scope, $location,$routeParams, Auth, $http) {
         $scope.login = function(form) {
 
             $scope.submitted = true;
+            $scope.errorMessage = false;
+            $scope.successMessage = false;
 
             if(form.$valid) {
                 console.log($scope.user);
@@ -42,6 +44,33 @@ angular.module('nodeserverApp')
             $event.stopPropagation();
 
             $scope.opened = true;
+        };
+
+        $scope.addAddress = function(){
+            var form = {
+                label: $scope.user.label,
+                firstName: $scope.user.name.first,
+                lastName: $scope.user.name.last,
+                companyName: $scope.user.company,
+                street: $scope.user.address,
+                postCode: $scope.user.zip
+            };
+            form = $.param(form);
+
+            $http({
+                    url: 'api/user/address',
+                    method: "POST",
+                    data:  form,
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            })
+            .then(function(data) {
+                $scope.successMessage = data.message;
+            }, 
+            function(data) { 
+                $scope.errorMessage = data.message;
+            });
+
+            $http.post('api/user/address', data)
         };
 
   });
