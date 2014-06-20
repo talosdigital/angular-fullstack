@@ -5,8 +5,6 @@ angular.module('nodeserverApp')
         $scope.login = function(form) {
 
             $scope.submitted = true;
-            $scope.errorMessage = false;
-            $scope.successMessage = false;
 
             if(form.$valid) {
                 console.log($scope.user);
@@ -49,11 +47,14 @@ angular.module('nodeserverApp')
         $scope.addAddress = function(){
             var form = {
                 label: $scope.user.label,
-                firstName: $scope.user.name.first,
-                lastName: $scope.user.name.last,
+                firstname: $scope.user.name.first,
+                lastname: $scope.user.name.last,
                 companyName: $scope.user.company,
                 street: $scope.user.address,
-                postCode: $scope.user.zip
+                postCode: $scope.user.zip,
+                city: $scope.user.city,
+                state: $scope.user.state,
+                country: $scope.user.country
             };
             form = $.param(form);
 
@@ -64,13 +65,15 @@ angular.module('nodeserverApp')
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .then(function(data) {
-                $scope.successMessage = data.message;
+                $scope.alerts = [
+                    { type: 'success', msg: data.data.message }
+                ];
             }, 
             function(data) { 
-                $scope.errorMessage = data.message;
+                $scope.alerts = [
+                    { type: 'danger', msg: data.message }
+                ];
             });
-
-            $http.post('api/user/address', data)
         };
 
   });

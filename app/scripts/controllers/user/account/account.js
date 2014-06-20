@@ -1,11 +1,28 @@
 'use strict';
 
 angular.module('nodeserverApp')
-  .controller('UserAccountAccountCtrl', function ($scope, $location,$routeParams, Auth) {
+  .controller('UserAccountAccountCtrl', function ($scope, $location,$routeParams, Auth, $http, $rootScope) {
 
         $scope.changepass = false;
 
         $scope.submittedpass = false;
+
+        $http({
+                url: 'api/user/profile',
+                method: "GET",
+        })
+        .then(function(data) {
+
+            $scope.user = {}
+            $scope.user.name = data.data.name;
+            $scope.user.email = data.data.email;
+
+        }, 
+        function(data) { 
+            $scope.alerts = [
+                { type: 'danger', msg: data.message }
+            ];
+        });
 
         $scope.login = function(form) {
 
@@ -16,10 +33,31 @@ angular.module('nodeserverApp')
             }
 
             if(form.$valid) {
-                console.log($scope.user);
-                $scope.alerts = [
-                    { type: 'success', msg: 'Settings were saved' }
-                ];
+                
+                var form = {
+                    name: $scope.user.name,
+                    email: $scope.user.email
+                };
+                form = $.param(form);
+
+                $http({
+                        url: 'api/user/profile/change-info',
+                        method: "POST",
+                        data:  form,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                })
+                .then(function(data) {
+                    $rootScope.currentUser.name = $scope.user.name;
+                    $scope.alerts = [
+                        { type: 'success', msg: data.data.message }
+                    ];
+                }, 
+                function(data) { 
+                    $scope.alerts = [
+                        { type: 'danger', msg: data.message }
+                    ];
+                });
+              
                 $scope.submitted = false;
                 $scope.submittedpass = false;
             }

@@ -1,4 +1,4 @@
-<div class="col-sm-6">
+<div class="col-sm-12">
     <div ng-show='{{errorMessage}}'>
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -7,14 +7,22 @@
     </div>
     <div ng-hide='{{errorMessage}}'>
         <h3>Address</h3>
+        <alert ng-repeat="alert in alerts" type='{{alert.type}}' close="closeAlert($index)">{{alert.msg}}</alert>
         <a ui-sref="account.address.new">Add an address</a>
         <div class="billing-wraper" ng-repeat='address in addresses'>
-            <h5>{{address.label}}</h5>
+            <hr>
+            <h5>{{address.label}} 
+                <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="delete($index)" >
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </h5>
             <p>{{address.fullName}}</p>
             <p>{{address.companyName}}</p>
             <p>{{address.street}}</p>
             <p>{{address.postCode}}</p>
-            <p/>
+            <p>{{address.city}}</p>
+            <p>{{address.state}}</p>
+            <p>{{address.country}}</p>
         </div>
     </div>
 </div>

@@ -1,18 +1,8 @@
-<div ng-show='{{errorMessage}}'>
-    <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{errorMessage}}
-    </div>
-</div>
-<div class="alert alert-success" ng-show='{{successMessage}}'>
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{successMessage}}
-</div>
 
 <h2>Address Book</h2>
 <form class="form-inline address-form" name="form" ng-submit="login(form)" novalidate>
 
-    <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    <alert ng-repeat="alert in alerts" type='{{alert.type}}' close="closeAlert($index)">{{alert.msg}}</alert>
 
     <div class="form-group col-sm-12" ng-class="form.label.$invalid && submitted ? 'has-error' : ''">
         <label class="sr-only">Address label</label>
