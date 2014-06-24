@@ -8,7 +8,8 @@ angular.module('nodeserverApp', [
   'ui.bootstrap',
   'ui.router',
   'facebook',
-  'directive.g+signin'
+  'directive.g+signin',
+  'angularFileUpload'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider , $stateProvider , $urlRouterProvider, FacebookProvider) {
 
@@ -34,6 +35,12 @@ angular.module('nodeserverApp', [
             url: '/information',
             templateUrl: 'views/partials/user/account/account.html',
             controller: 'UserAccountAccountCtrl',
+            authenticate: true
+        })
+        .state('account.profile', {
+            url: '/profile',
+            templateUrl: 'views/partials/user/account/profile.html',
+            controller: 'UserAccountProfileCtrl',
             authenticate: true
         })
         .state('account.address', {
