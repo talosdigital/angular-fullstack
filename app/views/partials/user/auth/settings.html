@@ -7,7 +7,7 @@
   <div class="col-sm-12">
     <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
 
-      <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+      <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
       <div class="form-group" ng-class="form.password.$error.mongoose && submitted ? 'has-error' : ''">
         <label>Current Password</label>

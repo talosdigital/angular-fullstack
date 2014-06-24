@@ -2,7 +2,7 @@
 <p>To merge any social network just click the buttons below</p>
 <div class="row">
     <div class="col-sm-12">
-        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         <hr>
         <facebook-login></facebook-login>
     </div>
