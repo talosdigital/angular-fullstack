@@ -11,17 +11,16 @@
         <a ui-sref="account.address.new">Add an address</a>
         <div class="billing-wraper" ng-repeat='address in addresses'>
             <hr>
-            <h5>{{address.label}} 
+            <h4>{{address.label}} 
                 <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="delete($index)" >
                   <span class="glyphicon glyphicon-remove"></span>
                 </button>
-            </h5>
+            </h4>
             <p>{{address.fullName}}</p>
             <p>{{address.companyName}}</p>
             <p>{{address.street}}</p>
+            <p>{{address.city}}, {{address.state}}</p>
             <p>{{address.postCode}}</p>
-            <p>{{address.city}}</p>
-            <p>{{address.state}}</p>
             <p>{{address.country}}</p>
         </div>
     </div>
