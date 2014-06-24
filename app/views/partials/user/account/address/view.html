@@ -11,7 +11,7 @@
         <a ui-sref="account.address.new">Add an address</a>
         <div class="billing-wraper" ng-repeat='address in addresses'>
             <hr>
-            <h4>{{address.label}} 
+            <h4><a href="user/account/address/edit/{{$index}}" ng-click="edit($index)">{{address.label}}</a> 
                 <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="delete($index)" >
                   <span class="glyphicon glyphicon-remove"></span>
                 </button>

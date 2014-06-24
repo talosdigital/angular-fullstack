@@ -14,7 +14,7 @@ angular.module('nodeserverApp')
       }
     };
   })
-    .directive('welcomeUser', function () {
+    .directive('welcomeUser', function ($rootScope) {
         return {
             restrict: 'E',
             template: '<p>Hi! {{currentUser.name}} welcome to you dashboard, here you will have a brief look at you recent activity</p>'

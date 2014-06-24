@@ -56,6 +56,13 @@ angular.module('nodeserverApp', [
             authenticate: true
 
         })
+        .state('account.address.edit', {
+            url: '/edit/:id',
+            templateUrl: 'views/partials/user/account/address/edit.html',
+            controller: 'UserAccountAddressEditCtrl',
+            authenticate: true
+
+        })
         .state('account.social', {
             url: '/social',
             templateUrl: 'views/partials/user/account/social.html',
