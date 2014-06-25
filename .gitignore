@@ -8,5 +8,6 @@ heroku
 dist
 .idea
 /app/api
+/app/old_api
 .project
 .pydevproject
