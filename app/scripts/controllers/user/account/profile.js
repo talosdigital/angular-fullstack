@@ -2,11 +2,13 @@
 
 angular.module('nodeserverApp')
   .controller('UserAccountProfileCtrl', function ($scope, $upload, $http) {
-        $scope.profile = 'Profile';
+        $scope.profile = 'Profile Picture';
         
         function getProfilePicture(){ 
             $http.get('/api/user/profile').success(function(data) {
-            $scope.profileimg = data.picture.longUrl;
+                if(data.picture != undefined){
+                    $scope.profileimg = data.picture.longUrl;
+                }  
             });
         }
 
@@ -45,9 +47,11 @@ angular.module('nodeserverApp')
                         ];
                 })
                 .error( function(data){
-                     $scope.alerts = [
-                        { type: 'danger', msg: data.data.message }
+                    $scope.progressBar = false;
+                    $scope.alerts = [
+                        { type: 'danger', msg: data.message }
                         ];
+                    getProfilePicture();
                 });
                 //.then(success, error, progress);
                 //.xhr(function(xhr){xhr.upload.addEventListener(...)})// access and attach any event listener to XMLHttpRequest.

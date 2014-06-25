@@ -2,10 +2,10 @@
 <!--<input type="text" ng-model="myModelObj">-->
 <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 <progressbar class="progress-striped active" value="dynamic" type="primary" ng-show='progressBar'>{{dynamic}} <i ng-show="showWarning"></i></progressbar>
-<img src="{{profileimg}}" alt="" style='width: 500px;' class="img-responsive"/>
+<img src="{{profileimg}}" alt="" style='max-width: 500px;' class="img-responsive"/>
 <p/>
 <span class="btn btn-primary btn-file">
-	Choose files <input type="file" ng-file-select="onFileSelect($files)">
+	Choose files <input type="file" ng-file-select="onFileSelect($files)" accept="image/*">
 </span>
 <div class="drag-place" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="over"
      ng-show="dropSupported">drop files here</div>

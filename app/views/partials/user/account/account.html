@@ -4,16 +4,14 @@
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 
     <div class="form-group col-sm-12" ng-class="form.Name.$invalid && submitted ? 'has-error' : ''">
-        <label class="sr-only">Name</label>
-
+    <label for="Name">Name</label>
         <input type="text" name="Name" class="form-control" ng-model="user.name" placeholder="Name" required>
         <p class="help-block" ng-show="form.Name.$invalid && submitted">
             Please fill your name
         </p>
     </div>
     <div class="form-group col-sm-12">
-        <label class="sr-only">Email</label>
-
+        <label for="email">Email</label>
         <input type="email" name="company" class="form-control" ng-model="user.email"  placeholder="Email">
     </div>
     <!--

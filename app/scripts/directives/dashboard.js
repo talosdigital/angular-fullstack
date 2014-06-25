@@ -8,7 +8,7 @@ angular.module('nodeserverApp')
   .directive('addressAmount', function () {
     return {
       restrict: 'E',
-      template: 'you have {{amount}} addresses register on you Address Book.  <a ui-sref="account.address.view">Edit</a>',
+      template: 'you have <b>{{currentUser.addresses.length}}<span ng-hide="currentUser.addresses.length">0</span></b> addresses register on you Address Book.  <a ui-sref="account.address.view">Edit</a>',
       controller: function($scope , Dashboard){
           $scope.amount = Dashboard.getAddress();
       }
@@ -17,6 +17,6 @@ angular.module('nodeserverApp')
     .directive('welcomeUser', function ($rootScope) {
         return {
             restrict: 'E',
-            template: '<p>Hi! {{currentUser.name}} welcome to you dashboard, here you will have a brief look at you recent activity</p>'
+            template: '<p>Hi! <b>{{currentUser.name}}</b> welcome to you dashboard, here you will have a brief look at you recent activity</p>'
         };
     });

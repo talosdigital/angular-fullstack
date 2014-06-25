@@ -34,6 +34,11 @@ angular.module('nodeserverApp')
             });
     });
 
+    $scope.closeAlert = function(index) {
+      $scope.alerts.splice(index, 1);
+      $scope.error = null;
+    };
+    
     $scope.register = function(form) {
       $scope.submitted = true;
 
@@ -47,16 +52,10 @@ angular.module('nodeserverApp')
           // Account created, redirect to home
           $state.transitionTo("account.welcome");
         })
-        .catch( function(err) {
-          console.log(err);
-          err = err.data;
-          $scope.errors = {};
-
-          // Update validity of form fields that match the mongoose errors
-          angular.forEach(err.errors, function(error, field) {
-            form[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.type;
-          });
+        .catch( function(data) {
+          $scope.alerts = [
+                { type: 'warning', msg: data.data.message }
+                ];
         });
       }
     };

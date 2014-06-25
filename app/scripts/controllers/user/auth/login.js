@@ -34,6 +34,11 @@ angular.module('nodeserverApp')
             });
         });
 
+        $scope.closeAlert = function(index) {
+            $scope.alerts.splice(index, 1);
+            $scope.error = null;
+        };
+
         $scope.loginform = function(form) {
             $scope.submitted = true;
 
@@ -47,8 +52,11 @@ angular.module('nodeserverApp')
                     $state.transitionTo("account.welcome");
                 })
                 .catch( function(err) {
-                    err = err.data;
-                    $scope.errors.other = err.message;
+                    //err = err.data;
+                    $scope.errors.other = err.data.message;
+                    /*$scope.alerts = [
+                        { type: 'danger', msg: err.data.message }
+                        ];*/
                 });
             }
         };

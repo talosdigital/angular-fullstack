@@ -8,7 +8,9 @@
     <div ng-hide='{{errorMessage}}'>
         <h3>Address</h3>
         <alert ng-repeat="alert in alerts" type='{{alert.type}}' close="closeAlert($index)">{{alert.msg}}</alert>
+        
         <a ui-sref="account.address.new">Add an address</a>
+        
         <div class="billing-wraper" ng-repeat='address in addresses'>
             <hr>
             <h4><a href="user/account/address/edit/{{$index}}" ng-click="edit($index)">{{address.label}}</a> 
